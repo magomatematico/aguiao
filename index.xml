@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Águia Oficial</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+        /* Estilo do menu suspenso */
+        .dropdown {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+        }
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 300px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+        .dropdown-content a, .submenu {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-family: Arial, sans-serif;
+        }
+        .submenu {
+            padding-left: 30px;
+        }
+        .dropdown-content a:hover, .submenu:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown:hover .dropbtn {
+            background-color: #45a049;
+        }
+        /* Ajustes para desktop */
+        @media (min-width: 768px) {
+            iframe {
+                height: 100vh;
+            }
+        }
+        /* Ajustes para smartphone */
+        @media (max-width: 767px) {
+            iframe {
+                height: 100vh;
+            }
+            .dropdown-content {
+                min-width: 200px;
+            }
+            .dropbtn {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropbtn">Menu</button>
+        <div class="dropdown-content">
+            <a href="#">App Águia Oficial</a>
+            <div class="submenu"><a href="https://www.aguiaoficialbet.com" target="_blank">Hospede o link</a></div>
+            <div class="submenu">Vantagens: 30% 15% 10% Bônus</div>
+            <div class="submenu">Milhar brinde a partir de 10 reais</div>
+            <div class="submenu">Jogo do bicho, fazendinha, cassino, bingo</div>
+            <div class="submenu">Cotação 1 real:</div>
+            <div class="submenu">Milhar: 8.000,00</div>
+            <div class="submenu">Centena: 800,00</div>
+            <div class="submenu">Grupo: 20,00</div>
+
+            <a href="#">App Águia Prime</a>
+            <div class="submenu"><a href="https://www.aguiaprime.net" target="_blank">Hospede o link</a></div>
+            <div class="submenu">Vantagens: 30% 15% 10% Bônus</div>
+            <div class="submenu">Milhar brinde a partir de 10 reais</div>
+            <div class="submenu">Jogo do bicho, fazendinha, cassino, bingo</div>
+            <div class="submenu">Cotação 1 real:</div>
+            <div class="submenu">Milhar: 8.000,00</div>
+            <div class="submenu">Centena: 800,00</div>
+            <div class="submenu">Grupo: 20,00</div>
+
+            <a href="#">App Lucky Animals</a>
+            <div class="submenu"><a href="https://app.luckyanimals.vip/pr/Pf3dEDH1" target="_blank">Hospede o link</a></div>
+            <div class="submenu">Vantagens: 30% 15% 10% Bônus</div>
+            <div class="submenu">Milhar brinde a partir de 5 reais</div>
+            <div class="submenu">Jogo do bicho, fazendinha, cassino, bingo</div>
+            <div class="submenu">Cotação 1 real:</div>
+            <div class="submenu">Milhar: 8.000,00</div>
+            <div class="submenu">Centena: 800,00</div>
+            <div class="submenu">Grupo: 20,00</div>
+
+            <a href="#">App London Loterias</a>
+            <div class="submenu"><a href="https://app.londonloterias.com/pr/Sv35CpWH" target="_blank">Hospede o link</a></div>
+            <div class="submenu">Vantagens: 30% 20% 10% Bônus</div>
+            <div class="submenu">Milhar brinde a partir de 10 reais</div>
+            <div class="submenu">Jogo do bicho, fazendinha, cassino</div>
+            <div class="submenu">Cotação 1 real:</div>
+            <div class="submenu">Milhar: 8.000,00</div>
+            <div class="submenu">Centena: 800,00</div>
+            <div class="submenu">Grupo: 20,00</div>
+
+            <a href="#">App Ouro Vip</a>
+            <div class="submenu"><a href="https://app.sistemabarao.com.br/ourovip?p=tE26oBsv" target="_blank">Hospede o link</a></div>
+            <div class="submenu">Vantagens: 15% 10% Bônus</div>
+            <div class="submenu">Bônus de indicação 5%</div>
+            <div class="submenu">Milhar brinde a partir de 5 reais</div>
+            <div class="submenu">Jogo do bicho, fazendinha, cassino, bingo</div>
+            <div class="submenu">Cotação 1 real:</div>
+            <div class="submenu">Milhar: 8.000,00</div>
+            <div class="submenu">Centena: 800,00</div>
+            <div class="submenu">Grupo: 20,00</div>
+        </div>
+    </div>
+    <iframe src="https://app.aguiaoficial.com/pr/sAeBgEfV" title="Águia Oficial"></iframe>
+</body>
+</html>
