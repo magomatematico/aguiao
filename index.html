@@ -44,15 +44,21 @@
             z-index: 1001;
             border-radius: 5px;
         }
-        .dropdown-content a, .submenu {
+        .dropdown-content a {
             color: black;
             padding: 12px 16px;
             text-decoration: none;
             display: block;
             font-family: Arial, sans-serif;
+            font-weight: bold;
         }
         .submenu {
+            color: black;
+            padding: 12px 16px;
             padding-left: 30px;
+            text-decoration: none;
+            display: block;
+            font-family: Arial, sans-serif;
         }
         .dropdown-content a:hover, .submenu:hover {
             background-color: #f1f1f1;
@@ -72,12 +78,36 @@
             border-bottom: none;
             margin-bottom: 0;
         }
-        /* Cores para cada submenu */
-        .aguia-oficial { background-color: # Ascendingly; color: #87CEEB; }
-        .aguia-prime { background-color: #98FB98; }
-        .lucky-animals { background-color: #FFDAB9; }
-        .london-loterias { background-color: #DDA0DD; }
-        .ouro-vip { background-color: #F0E68C; }
+        .aguia-oficial { background-color: #98FB98; }
+        .aguia-prime { background-color: #FFA500; }
+        .lucky-animals { background-color: #000000; }
+        .lucky-Os animais a, .lucky-animals .submenu { color: white; }
+        .london-loterias { background-color: #FFFF00; }
+        .ouro-vip { background-color: #FFD700; }
+        /* Botão flutuante do WhatsApp */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background-color: #25D366;
+            padding: 15px;
+            border-radius: 50%;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+        }
+        .whatsapp-btn img {
+            width: 30px;
+            height: 30px;
+        }
+        .whatsapp-btn:hover {
+            background-color: #20b858;
+        }
         @media (min-width: 768px) {
             iframe {
                 height: 100vh;
@@ -94,6 +124,15 @@
             .dropbtn {
                 padding: 8px 15px;
                 font-size: 14px;
+            }
+            .whatsapp-btn {
+                width: 40px;
+                height: 40px;
+                padding: 10px;
+            }
+            .whatsapp-btn img {
+                width: 20px;
+                height: 20px;
             }
         }
     </style>
@@ -155,6 +194,10 @@
             </div>
         </div>
     </div>
+    <!-- Botão flutuante do WhatsApp -->
+    <a href="https://api.whatsapp.com/send?phone=5583999719353" target="_blank" class="whatsapp-btn" aria-label="Contato via WhatsApp">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
     <iframe src="https://app.aguiaoficial.com/pr/sAeBgEfV" title="Águia Oficial"></iframe>
 </body>
 </html>
