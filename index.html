@@ -18,7 +18,6 @@
             border: none;
             display: block;
         }
-        /* Estilo do menu suspenso */
         .dropdown {
             position: fixed;
             top: 10px;
@@ -39,8 +38,10 @@
             position: absolute;
             background-color: #f9f9f9;
             min-width: 300px;
+            max-height: 80vh;
+            overflow-y: auto;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
+            z-index: 1001;
             border-radius: 5px;
         }
         .dropdown-content a, .submenu {
@@ -62,19 +63,27 @@
         .dropdown:hover .dropbtn {
             background-color: #45a049;
         }
-        /* Ajustes para desktop */
+        .menu-section {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        .menu-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
         @media (min-width: 768px) {
             iframe {
                 height: 100vh;
             }
         }
-        /* Ajustes para smartphone */
         @media (max-width: 767px) {
             iframe {
                 height: 100vh;
             }
             .dropdown-content {
                 min-width: 200px;
+                max-height: 70vh;
             }
             .dropbtn {
                 padding: 8px 15px;
@@ -85,58 +94,68 @@
 </head>
 <body>
     <div class="dropdown">
-        <button class="dropbtn">Menu</button>
+        <button class="dropbtn" aria-label="Abrir menu">Menu</button>
         <div class="dropdown-content">
-            <a href="#">App Águia Oficial</a>
-            <div class="submenu"><a href="https://www.aguiaoficialbet.com" target="_blank">Hospede o link</a></div>
-            <div class="submenu">Vantagens: 30% 15% 10% Bônus</div>
-            <div class="submenu">Milhar brinde a partir de 10 reais</div>
-            <div class="submenu">Jogo do bicho, fazendinha, cassino, bingo</div>
-            <div class="submenu">Cotação 1 real:</div>
-            <div class="submenu">Milhar: 8.000,00</div>
-            <div class="submenu">Centena: 800,00</div>
-            <div class="submenu">Grupo: 20,00</div>
+            <div class="menu-section">
+                <a href="#" aria-label="App Águia Oficial">App Águia Oficial</a>
+                <div class="submenu"><a href="https://www.aguiaoficialbet.com" target="_blank">Hospede o link</a></div>
+                <div class="submenu">Vantagens: 30% 15% 10% Bônus</div>
+                <div class="submenu">Milhar brinde a partir de 10 reais</div>
+                <div class="submenu">Jogo do bicho, fazendinha, cassino, bingo</div>
+                <div class="submenu">Cotação 1 real:</div>
+                <div class="submenu">Milhar: 8.000,00</div>
+                <div class="submenu">Centena: 800,00</div>
+                <div class="submenu">Grupo: 20,00</div>
+            </div>
 
-            <a href="#">App Águia Prime</a>
-            <div class="submenu"><a href="https://www.aguiaprime.net" target="_blank">Hospede o link</a></div>
-            <div class="submenu">Vantagens: 30% 15% 10% Bônus</div>
-            <div class="submenu">Milhar brinde a partir de 10 reais</div>
-            <div class="submenu">Jogo do bicho, fazendinha, cassino, bingo</div>
-            <div class="submenu">Cotação 1 real:</div>
-            <div class="submenu">Milhar: 8.000,00</div>
-            <div class="submenu">Centena: 800,00</div>
-            <div class="submenu">Grupo: 20,00</div>
+            <div class="menu-section">
+                <a href="#" aria-label="App Águia Prime">App Águia Prime</a>
+                <div class="submenu"><a href="https://www.aguiaprime.net" target="_blank">Hospede o link</a></div>
+                <div class="submenu">Vantagens: 30% 15% 10% Bônus</div>
+                <div class="submenu">Milhar brinde a partir de 10 reais</div>
+                <div class="submenu">Jogo do bicho, fazendinha, cassino, bingo</div>
+                <div class="submenu">Cotação 1 real:</div>
+                <div class="submenu">Milhar: 8.000,00</div>
+                <div class="submenu">Centena: 800,00</div>
+                <div class="submenu">Grupo: 20,00</div>
+            </div>
 
-            <a href="#">App Lucky Animals</a>
-            <div class="submenu"><a href="https://app.luckyanimals.vip/pr/Pf3dEDH1" target="_blank">Hospede o link</a></div>
-            <div class="submenu">Vantagens: 30% 15% 10% Bônus</div>
-            <div class="submenu">Milhar brinde a partir de 5 reais</div>
-            <div class="submenu">Jogo do bicho, fazendinha, cassino, bingo</div>
-            <div class="submenu">Cotação 1 real:</div>
-            <div class="submenu">Milhar: 8.000,00</div>
-            <div class="submenu">Centena: 800,00</div>
-            <div class="submenu">Grupo: 20,00</div>
+            <div class="menu-section">
+                <a href="#" aria-label="App Lucky Animals">App Lucky Animals</a>
+                <div class="submenu"><a href="https://app.luckyanimals.vip/pr/Pf3dEDH1" target="_blank">Hospede o link</a></div>
+                <div class="submenu">Vantagens: 30% 15% 10% Bônus</div>
+                <div class="submenu">Milhar brinde a partir de 5 reais</div>
+                <div class="submenu">Jogo do bicho, fazendinha, cassino, bingo</div>
+                <div class="submenu">Cotação 1 real:</div>
+                <div class="submenu">Milhar: 8.000,00</div>
+                <div class="submenu">Centena: 800,00</div>
+                <div class="submenu">Grupo: 20,00</div>
+            </div>
 
-            <a href="#">App London Loterias</a>
-            <div class="submenu"><a href="https://app.londonloterias.com/pr/Sv35CpWH" target="_blank">Hospede o link</a></div>
-            <div class="submenu">Vantagens: 30% 20% 10% Bônus</div>
-            <div class="submenu">Milhar brinde a partir de 10 reais</div>
-            <div class="submenu">Jogo do bicho, fazendinha, cassino</div>
-            <div class="submenu">Cotação 1 real:</div>
-            <div class="submenu">Milhar: 8.000,00</div>
-            <div class="submenu">Centena: 800,00</div>
-            <div class="submenu">Grupo: 20,00</div>
+            <div class="menu-section">
+                <a href="#" aria-label="App London Loterias">App London Loterias</a>
+                <div class="submenu"><a href="https://app.londonloterias.com/pr/Sv35CpWH" target="_blank">Hospede o link</a></div>
+                <div class="submenu">Vantagens: 30% 20% 10% Bônus</div>
+                <div class="submenu">Milhar brinde a partir de 10 reais</div>
+                <div class="submenu">Jogo do bicho, fazendinha, cassino</div>
+                <div class="submenu">Cotação 1 real:</div>
+                <div class="submenu">Milhar: 8.000,00</div>
+                <div class="submenu">Centena: 800,00</div>
+                <div class="submenu">Grupo: 20,00</div>
+            </div>
 
-            <a href="#">App Ouro Vip</a>
-            <div class="submenu"><a href="https://app.sistemabarao.com.br/ourovip?p=tE26oBsv" target="_blank">Hospede o link</a></div>
-            <div class="submenu">Vantagens: 15% 10% Bônus</div>
-            <div class="submenu">Bônus de indicação 5%</div>
-            <div class="submenu">Milhar brinde a partir de 5 reais</div>
-            <div class="submenu">Jogo do bicho, fazendinha, cassino, bingo</div>
-            <div class="submenu">Cotação 1 real:</div>
-            <div class="submenu">Milhar: 8.000,00</div>
-            <div class="submenu">Centena: 800,00</div>
-            <div class="submenu">Grupo: 20,00</div>
+            <div class="menu-section">
+                <a href="#" aria-label="App Ouro Vip">App Ouro Vip</a>
+                <div class="submenu"><a href="https://app.sistemabarao.com.br/ourovip?p=tE26oBsv" target="_blank">Hospede o link</a></div>
+                <div class="submenu">Vantagens: 15% 10% Bônus</div>
+                <div class="submenu">Bônus de indicação 5%</div>
+                <div class="submenu">Milhar brinde a partir de 5 reais</div>
+                <div class="submenu">Jogo do bicho, fazendinha, cassino, bingo</div>
+                <div class="submenu">Cotação 1 real:</div>
+                <div class="submenu">Milhar: 8.000,00</div>
+                <div class="submenu">Centena: 800,00</div>
+                <div class="submenu">Grupo: 20,00</div>
+            </div>
         </div>
     </div>
     <iframe src="https://app.aguiaoficial.com/pr/sAeBgEfV" title="Águia Oficial"></iframe>
