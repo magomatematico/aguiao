@@ -198,3 +198,287 @@
     <iframe src="https://app.aguiaoficial.com/pr/sAeBgEfV" title="Águia Oficial"></iframe>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palpites</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 300px;
+            box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+            padding: 10px;
+        }
+        .dropdown-content.show {
+            display: block;
+        }
+        .submenu {
+            margin: 10px 0;
+            cursor: pointer;
+            padding: 5px;
+            background-color: #f0f0f0;
+            border-radius: 3px;
+        }
+        .submenu:hover {
+            background-color: #e0e0e0;
+        }
+        .submenu-content {
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .submenu-content.show {
+            display: block;
+        }
+        .draw-time {
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .palpite {
+            margin: 5px 0;
+            padding: 5px;
+            background-color: #ffffff;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+        }
+        .palpite span.emoji {
+            margin-right: 5px;
+        }
+        .share-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #25D366;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        .share-btn:hover {
+            background-color: #128C7E;
+        }
+    </style>
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropdown-btn" onclick="toggleDropdown()">PALPITES</button>
+        <div id="dropdownContent" class="dropdown-content">
+            <div class="submenu" onclick="toggleSubmenu('lt-pt-rio')">LT PT RIO</div>
+            <div id="lt-pt-rio" class="submenu-content"></div>
+            <div class="submenu" onclick="toggleSubmenu('lt-look-goias')">LT LOOK GOIAS</div>
+            <div id="lt-look-goias" class="submenu-content"></div>
+            <div class="submenu" onclick="toggleSubmenu('lt-nacional')">LT NACIONAL</div>
+            <div id="lt-nacional" class="submenu-content"></div>
+            <div class="submenu" onclick="toggleSubmenu('lt-bahia')">LT BAHIA</div>
+            <div id="lt-bahia" class="submenu-content"></div>
+            <div class="submenu" onclick="toggleSubmenu('sao-paulo')">SÃO PAULO</div>
+            <div id="sao-paulo" class="submenu-content"></div>
+        </div>
+    </div>
+
+    <script>
+        const grupos = [
+            { nome: "AVESTRUZ", dezenas: ["01", "02", "03", "04"], emoji: "🦩" },
+            { nome: "ÁGUIA", dezenas: ["05", "06", "07", "08"], emoji: "🦅" },
+            { nome: "BURRO", dezenas: ["09", "10", "11", "12"], emoji: "🦊" },
+            { nome: "BORBOLETA", dezenas: ["13", "14", "15", "16"], emoji: "🦋" },
+            { nome: "CACHORRO", dezenas: ["17", "18", "19", "20"], emoji: "🐶" },
+            { nome: "CABRA", dezenas: ["21", "22", "23", "24"], emoji: "🐐" },
+            { nome: "CARNEIRO", dezenas: ["25", "26", "27", "28"], emoji: "🐑" },
+            { nome: "CAMELO", dezenas: ["29", "30", "31", "32"], emoji: "🐫" },
+            { nome: "COBRA", dezenas: ["33", "34", "35", "36"], emoji: "🐍" },
+            { nome: "COELHO", dezenas: ["37", "38", "39", "40"], emoji: "🐰" },
+            { nome: "CAVALO", dezenas: ["41", "42", "43", "44"], emoji: "🐎" },
+            { nome: "ELEFANTE", dezenas: ["45", "46", "47", "48"], emoji: "🐘" },
+            { nome: "GALO", dezenas: ["49", "50", "51", "52"], emoji: "🐓" },
+            { nome: "GATO", dezenas: ["53", "54", "55", "56"], emoji: "🐱" },
+            { nome: "JACARÉ", dezenas: ["57", "58", "59", "60"], emoji: "🐊" },
+            { nome: "LEÃO", dezenas: ["61", "62", "63", "64"], emoji: "🦁" },
+            { nome: "MACACO", dezenas: ["65", "66", "67", "68"], emoji: "🐒" },
+            { nome: "PORCO", dezenas: ["69", "70", "71", "72"], emoji: "🐷" },
+            { nome: "PAVÃO", dezenas: ["73", "74", "75", "76"], emoji: "🦚" },
+            { nome: "PERU", dezenas: ["77", "78", "79", "80"], emoji: "🦃" },
+            { nome: "TOURO", dezenas: ["81", "82", "83", "84"], emoji: "🐂" },
+            { nome: "TIGRE", dezenas: ["85", "86", "87", "88"], emoji: "🐅" },
+            { nome: "URSO", dezenas: ["89", "90", "91", "92"], emoji: "🐻" },
+            { nome: "VEADO", dezenas: ["93", "94", "95", "96"], emoji: "🦌" },
+            { nome: "VACA", dezenas: ["97", "98", "99", "00"], emoji: "🐄" }
+        ];
+
+        const drawTimes = {
+            "lt-pt-rio": [9, 11, 14, 16, 18, 21],
+            "lt-look-goias": [7, 9, 11, 14, 16, 18, 21, 23],
+            "lt-nacional": [2, 8, 10, 12, 15, 17, 20, 23],
+            "lt-bahia": [10, 12, 15, 19, 21],
+            "sao-paulo": [8, 10, 12, 13, 15, 17, 19, 20]
+        };
+
+        const submenus = [
+            "lt-pt-rio",
+            "lt-look-goias",
+            "lt-nacional",
+            "lt-bahia",
+            "sao-paulo"
+        ];
+
+        const submenuNames = {
+            "lt-pt-rio": "LT PT RIO",
+            "lt-look-goias": "LT LOOK GOIAS",
+            "lt-nacional": "LT NACIONAL",
+            "lt-bahia": "LT BAHIA",
+            "sao-paulo": "SÃO PAULO"
+        };
+
+        function toggleDropdown() {
+            const dropdownContent = document.getElementById("dropdownContent");
+            dropdownContent.classList.toggle("show");
+            if (dropdownContent.classList.contains("show")) {
+                submenus.forEach(submenu => generatePalpites(submenu));
+            }
+        }
+
+        function toggleSubmenu(id) {
+            const submenuContent = document.getElementById(id);
+            submenuContent.classList.toggle("show");
+            if (submenuContent.classList.contains("show")) {
+                generatePalpites(id);
+            }
+        }
+
+        function seededRandom(seed) {
+            let x = Math.sin(seed) * 10000;
+            return x - Math.floor(x);
+        }
+
+        function getBrasiliaTime() {
+            const now = new Date();
+            const brasiliaOffset = -3 * 60; // UTC-3 in minutes
+            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+            return new Date(utc + (brasiliaOffset * 60000));
+        }
+
+        function getDailySeed() {
+            const now = getBrasiliaTime();
+            return Math.floor(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) / 1000);
+        }
+
+        function getCurrentDrawTime(submenuId, now) {
+            const hours = drawTimes[submenuId];
+            const currentHour = now.getHours();
+
+            for (let i = 0; i < hours.length; i++) {
+                const startHour = hours[i] - 1;
+                const endHour = hours[i] + 1;
+                if (currentHour >= startHour && currentHour < endHour) {
+                    return hours[i];
+                }
+            }
+
+            if (currentHour < hours[0] - 1) {
+                return hours[0];
+            }
+
+            return hours[hours.length - 1];
+        }
+
+        function generatePalpites(submenuId) {
+            const palpitesDiv = document.getElementById(submenuId);
+            palpitesDiv.innerHTML = "";
+            const numPalpites = 5;
+            const now = getBrasiliaTime();
+            const drawHour = getCurrentDrawTime(submenuId, now);
+            const dailySeed = getDailySeed();
+
+            const drawDiv = document.createElement("div");
+            drawDiv.className = "draw-time";
+            drawDiv.innerHTML = `Palpite para as ${drawHour.toString().padStart(2, "0")}h`;
+            palpitesDiv.appendChild(drawDiv);
+
+            const baseSeed = dailySeed + submenuId.split("").reduce((sum, char) => sum + char.charCodeAt(0), 0) + drawHour;
+            const palpiteTexts = [];
+
+            for (let i = 0; i < numPalpites; i++) {
+                const seed = baseSeed + i;
+                const random = seededRandom(seed);
+                const numero = Math.floor(random * 10000).toString().padStart(4, "0");
+                const ultimosDois = numero.slice(-2);
+                let grupoNome = "";
+                let grupoNumero = "";
+                let emoji = "";
+
+                for (let j = 0; j < grupos.length; j++) {
+                    if (grupos[j].dezenas.includes(ultimosDois)) {
+                        grupoNome = grupos[j].nome;
+                        grupoNumero = (j + 1).toString().padStart(2, "0");
+                        emoji = grupos[j].emoji;
+                        break;
+                    }
+                }
+
+                const palpiteText = `${emoji} ${numero} ${grupoNome} - Grupo ${grupoNumero}`;
+                palpiteTexts.push(palpiteText);
+
+                const palpiteDiv = document.createElement("div");
+                palpiteDiv.className = "palpite";
+                palpiteDiv.innerHTML = `<span>${palpiteText}</span>`;
+                palpitesDiv.appendChild(palpiteDiv);
+            }
+
+            const shareMessage = `Palpite para ${submenuNames[submenuId]} - ${drawHour.toString().padStart(2, "0")}h\n${palpiteTexts.join("\n")}\nJogue agora: https://www.aguiaoficialbet.com/`;
+            const shareUrl = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
+
+            const shareDiv = document.createElement("div");
+            shareDiv.innerHTML = `<a href="${shareUrl}" target="_blank" class="share-btn">Compartilhar no WhatsApp</a>`;
+            palpitesDiv.appendChild(shareDiv);
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches(".dropdown-btn") && !event.target.matches(".submenu") && !event.target.matches(".share-btn")) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains("show")) {
+                        openDropdown.classList.remove("show");
+                    }
+                }
+                const submenus = document.getElementsByClassName("submenu-content");
+                for (let i = 0; i < submenus.length; i++) {
+                    const openSubmenu = submenus[i];
+                    if (openSubmenu.classList.contains("show")) {
+                        openSubmenu.classList.remove("show");
+                    }
+                }
+            }
+        }
+
+        window.onload = function() {
+            submenus.forEach(submenu => generatePalpites(submenu));
+        };
+    </script>
+</body>
+</html>
