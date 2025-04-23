@@ -252,6 +252,24 @@
             return day === 3 || day === 6;
         }
 
+        function isSunday() {
+            const now = getBrasiliaTime();
+            return now.getDay() === 0; // 0 = Sunday
+        }
+
+        function getEffectiveDrawTimes(submenuId, now) {
+            if (!isSunday()) {
+                return drawTimes[submenuId];
+            }
+            if (submenuId === "lt-pt-rio") {
+                return [9, 11, 14, 16]; // Up to 16:00 on Sundays
+            }
+            if (submenuId === "lt-bahia") {
+                return [10, 12, 15]; // Up to 15:00 on Sundays
+            }
+            return drawTimes[submenuId];
+        }
+
         function toggleDropdown() {
             const dropdownContent = document.getElementById("dropdownContent");
             dropdownContent.classList.toggle("show");
@@ -291,7 +309,7 @@
         }
 
         function getCurrentDrawTime(submenuId, now) {
-            const hours = drawTimes[submenuId];
+            const hours = getEffectiveDrawTimes(submenuId, now);
             const currentHour = now.getHours();
             const currentMinute = now.getMinutes();
             const currentMinuteOfDay = currentHour * 60 + currentMinute;
@@ -384,7 +402,7 @@
 
             const activeSubmenus = isFederalDay() ? submenus : submenus.filter(id => id !== "federal");
             activeSubmenus.forEach(submenuId => {
-                const hours = drawTimes[submenuId];
+                const hours = getEffectiveDrawTimes(submenuId, now);
                 hours.forEach(hour => {
                     const drawMinuteOfDay = hour * 60;
                     // Trigger update if within the first minute of the draw hour
