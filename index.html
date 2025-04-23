@@ -278,20 +278,28 @@
         function getCurrentDrawTime(submenuId, now) {
             const hours = drawTimes[submenuId];
             const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+            const currentMinuteOfDay = currentHour * 60 + currentMinute;
 
             for (let i = 0; i < hours.length; i++) {
-                const startHour = hours[i] - 1;
-                const endHour = hours[i] + 1;
-                if (currentHour >= startHour && currentHour < endHour) {
+                const drawMinuteOfDay = hours[i] * 60;
+                const windowStart = drawMinuteOfDay - 60; // 1 hour before
+                const windowEnd = drawMinuteOfDay + 60;   // 1 hour after
+                if (currentMinuteOfDay >= windowStart && currentMinuteOfDay < windowEnd) {
                     return hours[i];
                 }
             }
 
-            if (currentHour < hours[0] - 1) {
-                return hours[0];
+            // Find the next draw time
+            for (let i = 0; i < hours.length; i++) {
+                const drawMinuteOfDay = hours[i] * 60;
+                if (currentMinuteOfDay < drawMinuteOfDay) {
+                    return hours[i];
+                }
             }
 
-            return hours[hours.length - 1];
+            // If past the last draw, return the first draw of the next day
+            return hours[0];
         }
 
         function generatePalpites(submenuId) {
@@ -346,6 +354,31 @@
             palpitesDiv.appendChild(shareDiv);
         }
 
+        let lastUpdateMinute = -1;
+
+        function updatePalpitesIfNeeded() {
+            const now = getBrasiliaTime();
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+            const currentMinuteOfDay = currentHour * 60 + currentMinute;
+
+            if (currentMinute === lastUpdateMinute) {
+                return; // Prevent redundant updates in the same minute
+            }
+            lastUpdateMinute = currentMinute;
+
+            submenus.forEach(submenuId => {
+                const hours = drawTimes[submenuId];
+                hours.forEach(hour => {
+                    const drawMinuteOfDay = hour * 60;
+                    // Trigger update if within the first minute of the draw hour
+                    if (currentMinuteOfDay >= drawMinuteOfDay && currentMinuteOfDay < drawMinuteOfDay + 1) {
+                        generatePalpites(submenuId);
+                    }
+                });
+            });
+        }
+
         window.onclick = function(event) {
             if (!event.target.matches(".dropdown-btn") && !event.target.matches(".submenu") && !event.target.matches(".share-btn")) {
                 const dropdowns = document.getElementsByClassName("dropdown-content");
@@ -367,6 +400,7 @@
 
         window.onload = function() {
             submenus.forEach(submenu => generatePalpites(submenu));
+            setInterval(updatePalpitesIfNeeded, 60000); // Check every minute
         };
     </script>
 </body>
