@@ -338,7 +338,8 @@
             }
 
             const shareMessage = `*PALPITES PARA ${submenuNames[submenuId]} - ${drawHour.toString().padStart(2, "0")}H*\n\n${palpiteTexts.join("\n")}\n\nCadastre-se: https://www.aguiaoficialbet.com/\nPalpites para outras Loterias: https://www.aguiaoficial.net/`;
-            const shareUrl = `https://wa.me/?text=${encodeURIComponent(shareMessage)}`;
+            const encodedMessage = encodeURIComponent(shareMessage);
+            const shareUrl = `https://wa.me/?text=${encodedMessage}`;
 
             const shareDiv = document.createElement("div");
             shareDiv.innerHTML = `<a href="${shareUrl}" target="_blank" class="share-btn">Compartilhar no WhatsApp</a>`;
