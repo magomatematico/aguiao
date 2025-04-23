@@ -133,6 +133,9 @@
         .whatsapp-btn:hover {
             background-color: #20b858;
         }
+        .hidden {
+            display: none;
+        }
         @media (min-width: 768px) {
             iframe {
                 height: 100vh;
@@ -176,6 +179,8 @@
             <div id="lt-bahia" class="submenu-content"></div>
             <div class="submenu" onclick="toggleSubmenu('sao-paulo')">SÃO PAULO</div>
             <div id="sao-paulo" class="submenu-content"></div>
+            <div class="submenu" id="federal-submenu" onclick="toggleSubmenu('federal')">FEDERAL</div>
+            <div id="federal" class="submenu-content"></div>
             <div class="submenu" onclick="toggleSubmenu('saiba-mais')">SAIBA MAIS</div>
             <div id="saiba-mais" class="submenu-content"></div>
         </div>
@@ -219,7 +224,8 @@
             "lt-look-goias": [7, 9, 11, 14, 16, 18, 21, 23],
             "lt-nacional": [2, 8, 10, 12, 15, 17, 20, 23],
             "lt-bahia": [10, 12, 15, 19, 21],
-            "sao-paulo": [8, 10, 12, 13, 15, 17, 19, 20]
+            "sao-paulo": [8, 10, 12, 13, 15, 17, 19, 20],
+            "federal": [19]
         };
 
         const submenus = [
@@ -227,7 +233,8 @@
             "lt-look-goias",
             "lt-nacional",
             "lt-bahia",
-            "sao-paulo"
+            "sao-paulo",
+            "federal"
         ];
 
         const submenuNames = {
@@ -235,14 +242,22 @@
             "lt-look-goias": "LT LOOK GOIAS",
             "lt-nacional": "LT NACIONAL",
             "lt-bahia": "LT BAHIA",
-            "sao-paulo": "SÃO PAULO"
+            "sao-paulo": "SÃO PAULO",
+            "federal": "FEDERAL"
         };
+
+        function isFederalDay() {
+            const now = getBrasiliaTime();
+            const day = now.getDay(); // 0 = Sunday, 3 = Wednesday, 6 = Saturday
+            return day === 3 || day === 6;
+        }
 
         function toggleDropdown() {
             const dropdownContent = document.getElementById("dropdownContent");
             dropdownContent.classList.toggle("show");
             if (dropdownContent.classList.contains("show")) {
-                submenus.forEach(submenu => generatePalpites(submenu));
+                const activeSubmenus = isFederalDay() ? submenus : submenus.filter(id => id !== "federal");
+                activeSubmenus.forEach(submenu => generatePalpites(submenu));
             }
         }
 
@@ -305,7 +320,7 @@
         function generatePalpites(submenuId) {
             const palpitesDiv = document.getElementById(submenuId);
             palpitesDiv.innerHTML = "";
-            const numPalpites = 5;
+            const numPalpites = submenuId === "federal" ? 10 : 5;
             const now = getBrasiliaTime();
             const drawHour = getCurrentDrawTime(submenuId, now);
             const dailySeed = getDailySeed();
@@ -367,7 +382,8 @@
             }
             lastUpdateMinute = currentMinute;
 
-            submenus.forEach(submenuId => {
+            const activeSubmenus = isFederalDay() ? submenus : submenus.filter(id => id !== "federal");
+            activeSubmenus.forEach(submenuId => {
                 const hours = drawTimes[submenuId];
                 hours.forEach(hour => {
                     const drawMinuteOfDay = hour * 60;
@@ -377,6 +393,15 @@
                     }
                 });
             });
+        }
+
+        function updateFederalMenuVisibility() {
+            const federalSubmenu = document.getElementById("federal-submenu");
+            if (isFederalDay()) {
+                federalSubmenu.classList.remove("hidden");
+            } else {
+                federalSubmenu.classList.add("hidden");
+            }
         }
 
         window.onclick = function(event) {
@@ -399,8 +424,13 @@
         }
 
         window.onload = function() {
-            submenus.forEach(submenu => generatePalpites(submenu));
-            setInterval(updatePalpitesIfNeeded, 60000); // Check every minute
+            updateFederalMenuVisibility();
+            const activeSubmenus = isFederalDay() ? submenus : submenus.filter(id => id !== "federal");
+            activeSubmenus.forEach(submenu => generatePalpites(submenu));
+            setInterval(() => {
+                updateFederalMenuVisibility();
+                updatePalpitesIfNeeded();
+            }, 60000); // Check every minute
         };
     </script>
 </body>
